@@ -1,0 +1,61 @@
+cabal-version:      2.4
+name:               {{ project_name }}
+version:            0.1.0.0
+
+synopsis: {{ project_description }}
+-- A longer description of the package.
+-- description:
+-- category:
+
+bug-reports: https://github.com/amy-keibler/{{ project_name }}
+
+author: Amy Keibler
+maintainer: amelia.keibler@gmail.com
+copyright: (c) {{ now() | date(format="%Y") }} Amy Keibler
+{% if license == "mit-plus-apache-2" -%}
+license: Apache-2.0 OR MIT
+{%- endif %}
+license-files: {% if license == "be-gay-do-crime" -%}
+                 LICENSE
+               {%- elif license == "mit-plus-apache-2" -%}
+                 LICENSE-APACHE
+             , LICENSE-MIT
+               {%- endif %}
+extra-source-files: CHANGELOG.md
+
+{%- if has_tests %}
+library {{ project_name }}-lib
+    exposed-modules:    {{ project_module }}
+    build-depends:      base ^>=4.14.1.0
+                      , relude
+    hs-source-dirs:     src
+    default-language:   Haskell2010
+    default-extensions: NoImplicitPrelude
+                      , OverloadedStrings
+
+test-suite {{ project_name }}-tests
+    type:               exitcode-stdio-1.0
+    main-is:            Spec.hs
+    other-modules:      {{ project_module }}Spec
+    build-depends:      base ^>=4.14.1.0
+                      , {{ project_name }}-lib
+                      , hspec
+                      , relude
+    hs-source-dirs:     test
+    default-language:   Haskell2010
+    default-extensions: NoImplicitPrelude
+                      , OverloadedStrings
+{% endif %}
+
+executable {{ project_name }}
+    main-is:            Main.hs
+    build-depends:      base ^>=4.14.1.0
+{%- if has_tests %}
+                      , {{ project_name }}-lib
+{%- endif %}
+                      , optparse-applicative
+                      , relude
+    hs-source-dirs:     app
+    default-language:   Haskell2010
+    default-extensions: NoImplicitPrelude
+                      , OverloadedStrings

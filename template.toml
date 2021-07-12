@@ -1,0 +1,53 @@
+name = "Haskell CLI Starter"
+
+description = ""
+
+kickstart_version = 1
+
+ignore = [
+       "README.md"
+]
+
+cleanup = [
+        { name = "license", value = "be-gay-do-crime", paths = [
+        "{{ project_name }}/LICENSE-MIT",
+        "{{ project_name }}/LICENSE-APACHE",
+        ] },
+        { name = "license", value = "mit-plus-apache-2", paths = ["{{ project_name }}/LICENSE"] },
+        { name = "has_tests", value = false, paths = [
+        "{{ project_name }}/src",
+        "{{ project_name }}/test",
+        ] },
+]
+
+[[variables]]
+name = "project_name"
+default = "example"
+prompt = "What is the name for your project?"
+validation = "^([a-z][a-z-]+[a-z])$"
+
+[[variables]]
+name = "project_description"
+default = "TODO: Add Description"
+prompt = "Describe the purpose of the application."
+
+[[variables]]
+name = "license"
+default = "be-gay-do-crime"
+prompt = "What should the license be?"
+choices = [
+        "be-gay-do-crime",
+        "mit-plus-apache-2"
+]
+
+[[variables]]
+name = "has_tests"
+default = true
+prompt = "Should this project include a test framework?"
+
+[[variables]]
+name = "project_module"
+default = "Example"
+prompt = "What is the name for your main module?"
+validation = "^(([A-Z][a-z]+)+)$"
+only_if = { name = "has_tests", value = true }
