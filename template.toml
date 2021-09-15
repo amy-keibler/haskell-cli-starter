@@ -14,6 +14,9 @@ cleanup = [
         "{{ project_name }}/LICENSE-APACHE",
         ] },
         { name = "license", value = "mit-plus-apache-2", paths = ["{{ project_name }}/LICENSE"] },
+        { name = "has_mocks", value = false, paths = [
+        "{{ project_name }}/test/Mock",
+        ] },
         { name = "has_tests", value = false, paths = [
         "{{ project_name }}/src",
         "{{ project_name }}/test",
@@ -44,6 +47,12 @@ choices = [
 name = "has_tests"
 default = true
 prompt = "Should this project include a test framework?"
+
+[[variables]]
+name = "has_mocks"
+default = false
+prompt = "Should this project include HMock?"
+only_if = { name = "has_tests", value = true }
 
 [[variables]]
 name = "project_module"
