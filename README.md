@@ -18,7 +18,11 @@ The license of the project. Currently supports the [Be Gay, Do Crime](https://tw
 
 ### `has_tests`
 
-Is this project a throwaway utility or does it need a library and test suite to ensure it behaves correctly? Tests are done via [Hspec](https://hspec.github.io/) and [Tasty](https://github.com/UnkindPartition/tasty).
+Is this project a throwaway utility or does it need a library and test suite to ensure it behaves correctly? Tests are done via [Hspec](https://hspec.github.io/).
+
+### `has_mocks`
+
+If the project has tests, should we include [HMock](https://github.com/cdsmith/HMock) to allow mocking of monads used within the application?
 
 ### `project_module`
 

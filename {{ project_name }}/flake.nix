@@ -20,6 +20,8 @@
                 haskell-language-server = {};
                 hlint = {};
               };
+              shell.withHoogle = true;
+              shell.exactDeps = true;
             };
         })
       ];

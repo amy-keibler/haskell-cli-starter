@@ -37,8 +37,14 @@ test-suite {{ project_name }}-tests
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:      {{ project_module }}Spec
+{%- if has_mocks %}
+                        Mock.{{ project_module }}
+{%- endif %}
     build-depends:      base ^>=4.14.1.0
                       , {{ project_name }}-lib
+{%- if has_mocks %}
+                      , HMock
+{%- endif %}
                       , hspec
                       , relude
     hs-source-dirs:     test
